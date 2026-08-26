@@ -4,18 +4,14 @@ namespace Player
 {
     public class PlayerMovement : MonoBehaviour
     {
-        /// <summary>
-        /// Источник управления персонажем.
-        /// </summary>
+        // Источник управления персонажем.
         private enum ControlType
         {
             Keyboard,
             Joystick
         }
-
-        /// <summary>
-        /// Текущее состояние персонажа.
-        /// </summary>
+        
+        // Текущее состояние персонажа.
         private enum PlayerState
         {
             Idle,
@@ -34,8 +30,7 @@ namespace Player
 
         [Header("Input")]
 
-        // Ссылка на Joystick Pack.
-        // Заполняется, если выбран тип управления Joystick.
+        // Ссылка на Joystick Pack. Заполняется, если выбран тип управления Joystick.
         [SerializeField] private Joystick _joystick;
 
         [Header("Animation")]
@@ -44,14 +39,12 @@ namespace Player
         [SerializeField] private Animator _animator;
 
         // Минимальное значение ввода, которое считается движением.
-        // Особенно полезно для экранного джойстика.
-        [SerializeField] private float _inputDeadZone = 0.1f;
+        [SerializeField] private float _inputDeadZone;
 
         // Текущее движение персонажа.
         private Vector3 _movement;
 
         // Последнее направление, в котором смотрел персонаж.
-        // По умолчанию персонаж смотрит вниз.
         private Vector2 _lastDirection = Vector2.down;
 
         // Текущее состояние персонажа.
@@ -69,22 +62,17 @@ namespace Player
 
         private static readonly int IsInteractingHash =
             Animator.StringToHash("IsInteracting");
-
-        /// <summary>
-        /// Текущее направление движения персонажа.
-        /// </summary>
+        
+        // Текущее направление движения персонажа.
         public Vector3 Movement => _movement;
-
-        /// <summary>
-        /// Возвращает true, если персонаж взаимодействует с объектом.
-        /// </summary>
+        
+        // Возвращает true, если персонаж взаимодействует с объектом.
         public bool IsInteracting =>
             _currentState == PlayerState.Interacting;
 
         private void Update()
         {
-            // Во время взаимодействия ввод не считываем,
-            // чтобы персонаж не мог двигаться.
+            // Во время взаимодействия ввод не считываем, чтобы персонаж не мог двигаться.
             if (_currentState != PlayerState.Interacting)
             {
                 ReadInput();
@@ -99,10 +87,8 @@ namespace Player
             // Обновляем параметры Animator каждый кадр.
             UpdateAnimation();
         }
-
-        /// <summary>
-        /// Считывает ввод с клавиатуры или экранного джойстика.
-        /// </summary>
+        
+        // Считывает ввод с клавиатуры или экранного джойстика.
         private void ReadInput()
         {
             float horizontal;
@@ -126,14 +112,13 @@ namespace Player
 
             Vector2 input = new Vector2(horizontal, vertical);
 
-            // Игнорируем слишком слабое отклонение джойстика.
+            // Игнорируем слабое отклонение джойстика.
             if (input.magnitude < _inputDeadZone)
             {
                 input = Vector2.zero;
             }
 
-            // Не позволяем двигаться по диагонали быстрее,
-            // чем по одной оси.
+            // Не позволяем двигаться по диагонали быстрее, чем по одной оси.
             if (input.sqrMagnitude > 1f)
             {
                 input.Normalize();
@@ -142,26 +127,21 @@ namespace Player
             // Преобразуем двумерный ввод в движение по XY.
             _movement = new Vector3(input.x, input.y, 0f);
 
-            // Направление взгляда обновляется только во время движения.
-            // Поэтому после остановки персонаж сохраняет последнее направление.
+            // Направление взгляда обновляется только во время движения. Поэтому после остановки персонаж сохраняет последнее направление.
             if (input != Vector2.zero)
             {
                 _lastDirection = GetAnimationDirection(input);
             }
         }
-
-        /// <summary>
-        /// Перемещает персонажа без использования физики.
-        /// </summary>
+        
+        // Перемещает персонажа без использования физики.
         private void Move()
         {
             transform.position += _movement *
                                   (_moveSpeed * Time.deltaTime);
         }
-
-        /// <summary>
-        /// Передаёт направление и скорость в Animator.
-        /// </summary>
+        
+        // Передаёт направление и скорость в Animator.
         private void UpdateAnimation()
         {
             if (_animator == null)
@@ -169,8 +149,7 @@ namespace Player
                 return;
             }
 
-            // Передаём последнее направление взгляда.
-            // Эти параметры используются Blend Tree внутри Idle и Run.
+            // Передаём последнее направление взгляда. Эти параметры используются Blend Tree внутри Idle и Run.
             _animator.SetFloat(
                 HorizontalHash,
                 _lastDirection.x
@@ -181,10 +160,7 @@ namespace Player
                 _lastDirection.y
             );
 
-            // Speed используется для переходов:
-            //
-            // Idle → Run, если Speed > 0.1
-            // Run → Idle, если Speed < 0.1
+            // Speed используется для переходов: Idle → Run и Run → Idle
             float speed = _movement.magnitude;
 
             _animator.SetFloat(SpeedHash, speed);
@@ -195,15 +171,12 @@ namespace Player
                 _currentState == PlayerState.Interacting
             );
         }
+        
+        // Выбирает одно из четырёх основных направлений для Blend Tree.
 
-        /// <summary>
-        /// Выбирает одно из четырёх основных направлений
-        /// для Blend Tree.
-        /// </summary>
         private Vector2 GetAnimationDirection(Vector2 input)
         {
-            // Если горизонтальный ввод сильнее вертикального,
-            // выбираем направление влево или вправо.
+            // Если горизонтальный ввод сильнее вертикального, выбираем направление влево или вправо.
             if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
             {
                 return new Vector2(
@@ -218,11 +191,8 @@ namespace Player
                 Mathf.Sign(input.y)
             );
         }
-
-        /// <summary>
-        /// Запускает состояние взаимодействия.
-        /// Этот метод можно вызвать из другого компонента.
-        /// </summary>
+        
+        // Запускает состояние взаимодействия.
         public void StartInteraction()
         {
             if (_currentState == PlayerState.Interacting)
@@ -239,10 +209,8 @@ namespace Player
             // Сразу обновляем Animator.
             UpdateAnimation();
         }
-
-        /// <summary>
-        /// Завершает взаимодействие.
-        /// </summary>
+        
+        // Завершает взаимодействие.
         public void StopInteraction()
         {
             if (_currentState != PlayerState.Interacting)
@@ -250,12 +218,10 @@ namespace Player
                 return;
             }
 
-            // После завершения взаимодействия
-            // персонаж возвращается в состояние ожидания.
+            // После завершения взаимодействия персонаж возвращается в состояние ожидания.
             _currentState = PlayerState.Idle;
 
-            // Движение остаётся остановленным,
-            // поэтому Speed будет равен нулю.
+            // Движение остаётся остановленным, поэтому Speed будет равен нулю.
             _movement = Vector3.zero;
 
             // Сразу обновляем Animator.
