@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerHeath : ObjectHealth
+    public class PlayerHealth : ObjectHealth
     {
         private WaitForSeconds _regenerationInterval = new WaitForSeconds(5f);
         private float _regenerationValue = 1f;
