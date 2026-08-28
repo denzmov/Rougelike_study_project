@@ -10,7 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2956237141009323739}
   - component: {fileID: 8761051960447825569}
-  m_Layer: 0
+  - component: {fileID: 6534163503236051451}
+  - component: {fileID: 6574196454374933928}
+  - component: {fileID: 5817137076609779612}
+  m_Layer: 6
   m_Name: Bird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,9 +48,81 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b857b5551a924484aaccd3d311ee1748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy.EnemyMove
-  _moveSpeed: 7
-  _freezeTimer: 0
+  _moveSpeed: 5
   _animator: {fileID: 8482863473293497997}
+--- !u!114 &6534163503236051451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299238410387799409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83607d768f2143b7823996765da55792, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy.EnemyHealth
+  _maxHealth: 20
+  _currentHealth: 0
+--- !u!114 &6574196454374933928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299238410387799409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be056598bde4ad19f558675a5dc1bf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy.EnemyCollision
+  _damage: 5
+--- !u!61 &5817137076609779612
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299238410387799409}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.45, y: 0.9}
+  m_EdgeRadius: 0
 --- !u!1 &1545204198723108083
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,7 +134,7 @@ GameObject:
   - component: {fileID: 9189459613657562107}
   - component: {fileID: 3849078650680622169}
   - component: {fileID: 8482863473293497997}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BirdSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
