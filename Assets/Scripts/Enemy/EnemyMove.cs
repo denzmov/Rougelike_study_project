@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using Player;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -11,9 +8,9 @@ namespace Enemy
     public class EnemyMove : MonoBehaviour
     {
         [SerializeField] private float _moveSpeed;
-        [SerializeField] private float _freezeTimer;
+        //[SerializeField] private float _freezeTimer; // пока уберем, т.к. не используем.
         [SerializeField] private Animator _animator;
-        private Vector3 _direction;
+        //private Vector3 _direction; // оставляем локальной переменной внутри метода Move
         private PlayerMovement _playerMovement;
         private WaitForSeconds _checkTime =  new WaitForSeconds(3f);
         private Coroutine _distanceToHide;
@@ -26,10 +23,10 @@ namespace Enemy
 
         private void Move()
         {
-            _direction = (_playerMovement.transform.position - transform.position).normalized;
-            transform.position += _direction * (_moveSpeed * Time.deltaTime);
-            _animator.SetFloat("Horizontal", _direction.x);
-            _animator.SetFloat("Vertical", _direction.y);
+            Vector3 direction = (_playerMovement.transform.position - transform.position).normalized;
+            transform.position += direction * (_moveSpeed * Time.deltaTime);
+            _animator.SetFloat("Horizontal", direction.x);
+            _animator.SetFloat("Vertical", direction.y);
         }
 
         // Исчезновение противников на удаленной дситанции от игрока
