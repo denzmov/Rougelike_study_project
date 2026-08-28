@@ -12,6 +12,7 @@ namespace Enemy
             if (other.gameObject.TryGetComponent(out PlayerHealth player))
             {
                 player.TakeDamage(_damage);
+                //player.OnHealthChanged?.Invoke(); //дубляж из PlayerHealth
                 gameObject.SetActive(false);
             }
         }
