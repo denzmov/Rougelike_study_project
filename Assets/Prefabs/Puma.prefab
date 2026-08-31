@@ -77,6 +77,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy.EnemyCollision
   _damage: 5
+  _applyBleeding: 1
+  _dotDamagePerTick: 10
+  _dotTickInterval: 1
+  _dotDuration: 10
 --- !u!61 &4155266557304413648
 BoxCollider2D:
   m_ObjectHideFlags: 0
