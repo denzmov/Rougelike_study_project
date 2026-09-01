@@ -58,12 +58,14 @@ namespace Player
         private IEnumerator DoTRoutine(float damagePerTick, float interval, float duration)
         {
             float elapsed = 0f;
-
+            var wait = new WaitForSeconds(interval); // создаём один раз, до цикла
+            
             while (elapsed < duration && CurrentHealth > 0)
             {
                 TakeDamage(damagePerTick);
                 elapsed += interval;
-                yield return new WaitForSeconds(interval);
+                //yield return new WaitForSeconds(interval); // лишнее, т.к. теперь интервал ожидания создается сразу в корутине до цикла
+                yield return wait;
             }
 
             _dotRoutine = null;
