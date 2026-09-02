@@ -9,7 +9,7 @@ namespace Player.Weapon
     public abstract class BaseWeapon : MonoBehaviour
     {
         [SerializeField] private List<WeaponStats> _weaponStats = new List<WeaponStats>();
-        [SerializeField] private float _damage;
+        protected float _damage;
         private DiContainer _diContainer;
         private int _currentLevel = 1; // текущий изначальный уровень прокачки оружия
         private int _maxLevel = 8; // максимальный уровень прокачки оружия
