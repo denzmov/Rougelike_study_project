@@ -31,7 +31,7 @@ namespace Player.Weapon
         }
 
 
-        private void OnTriggerEnter2D(Collider2D other)
+        protected virtual void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.TryGetComponent(out EnemyHealth enemy))
             {
@@ -42,7 +42,7 @@ namespace Player.Weapon
 
         protected virtual void SetStats(int value) => _damage = _weaponStats[value].Damage; // устанавиваем для поля damage то значение урона, которое содержит тот или иной уровень
 
-        [Inject] public void Construct(DiContainer diContainer)
+        [Inject] private void Construct(DiContainer diContainer)
         {
             _diContainer = diContainer;
         }

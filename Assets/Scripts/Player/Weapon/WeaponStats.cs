@@ -2,6 +2,7 @@
 
 namespace Player.Weapon
 {
+    [System.Serializable]
     public class WeaponStats
     {
         [SerializeField] private float _speed, _damage, _range, _timeBetweenAttack, _duration;

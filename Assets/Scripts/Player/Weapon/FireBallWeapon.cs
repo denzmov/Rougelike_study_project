@@ -29,6 +29,11 @@ namespace Player.Weapon
             SetStats(0);
             SetupWeapon();
             Activate();
+            // LevelUp();
+            // LevelUp();
+            // LevelUp();
+            // LevelUp();
+            // LevelUp();
         }
 
         private void Update() => transform.Rotate(0, 0, _rotationSpeed * Time.deltaTime);
