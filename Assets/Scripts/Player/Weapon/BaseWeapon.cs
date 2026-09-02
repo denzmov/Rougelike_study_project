@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Enemy;
 using UnityEngine;
 using Zenject;
@@ -12,23 +11,23 @@ namespace Player.Weapon
         [SerializeField] private List<WeaponStats> _weaponStats = new List<WeaponStats>();
         [SerializeField] private float _damage;
         private DiContainer _diContainer;
-        private int _currentHealth = 1; // текущий изначальный уровень прокачки оружия
-        private int _maxHealth = 8; // максимальный уровень прокачки оружия
+        private int _currentLevel = 1; // текущий изначальный уровень прокачки оружия
+        private int _maxLevel = 8; // максимальный уровень прокачки оружия
 
         public List<WeaponStats> WeaponStats => _weaponStats;
         public float Damage => _damage;
-        public int CurrentHealth => _currentHealth;
-        public int MaxHealth => _maxHealth;
+        public int CurrentLevel => _currentLevel;
+        public int MaxLevel => _maxLevel;
 
         protected virtual void Awake() => _diContainer.Inject(this);
 
-        private void Start() => SetStats(0);
+        protected virtual void Start() => SetStats(0);
 
         public virtual void LevelUp()
         {
-            if(CurrentHealth < _maxHealth)
-                _currentHealth++;
-            SetStats(_currentHealth-1);
+            if(CurrentLevel < _maxLevel)
+                _currentLevel++;
+            SetStats(_currentLevel-1);
         }
 
 
