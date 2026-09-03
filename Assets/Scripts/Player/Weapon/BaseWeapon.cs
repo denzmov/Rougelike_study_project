@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Enemy;
 using UnityEngine;
 using Zenject;
@@ -9,16 +10,20 @@ namespace Player.Weapon
     public abstract class BaseWeapon : MonoBehaviour
     {
         [SerializeField] private List<WeaponStats> _weaponStats = new List<WeaponStats>();
+        [SerializeField] private string _displayName; // подпись для HUD, задаётся в инспекторе
         protected float _damage;
         private DiContainer _diContainer;
         private int _currentLevel = 1; // текущий изначальный уровень прокачки оружия
         private int _maxLevel = 8; // максимальный уровень прокачки оружия
+        public event Action LevelUpped; // событие повышения уровня - на это событие подписан HUD
 
         public List<WeaponStats> WeaponStats => _weaponStats;
         public float Damage => _damage;
         public int CurrentLevel => _currentLevel;
         public int MaxLevel => _maxLevel;
 
+        public string DisplayName => string.IsNullOrEmpty(_displayName) ? name : _displayName; // фолбэк на имя объекта
+        
         protected virtual void Awake() => _diContainer.Inject(this);
 
         protected virtual void Start() => SetStats(0);
@@ -28,6 +33,7 @@ namespace Player.Weapon
             if(CurrentLevel < _maxLevel)
                 _currentLevel++;
             SetStats(_currentLevel-1);
+            LevelUpped?.Invoke(); // уведомляем HUD
         }
 
 
