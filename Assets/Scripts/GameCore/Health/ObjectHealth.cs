@@ -7,7 +7,9 @@ namespace GameCore.Health
     {
         [SerializeField] private float _maxHealth;
         [SerializeField] private float _currentHealth;
-
+        
+        public event Action<float> Damaged; // Событие вызывается после получения урона. В параметр передаётся размер нанесённого урона.
+        
         public float MaxHealth => _maxHealth;
         public float CurrentHealth => _currentHealth;
 
@@ -18,6 +20,7 @@ namespace GameCore.Health
             if(damage <= 0)
                 throw new ArgumentOutOfRangeException(nameof(damage));
             _currentHealth -= damage;
+            Damaged?.Invoke(damage); // Уведомляем EnemyDamageFlash и других подписчиков о том, что объект получил урон.
         }
 
         public void TakeHeal(float value)

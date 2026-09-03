@@ -2197,6 +2197,7 @@ MonoBehaviour:
     _range: 10
     _timeBetweenAttack: 0.5
     _duration: 0
+  _displayName: Aura
   _targetContainer: {fileID: 1883623966}
   _collider: {fileID: 142063560}
 --- !u!1 &148484741
@@ -6357,6 +6358,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 489493855}
+  - {fileID: 931285401}
   m_Father: {fileID: 1083603418}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -107855,6 +107857,99 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 3
   m_ColliderType: 1
+--- !u!1 &931285400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 931285401}
+  - component: {fileID: 931285403}
+  - component: {fileID: 931285402}
+  - component: {fileID: 931285404}
+  m_Layer: 5
+  m_Name: WeaponLevelText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &931285401
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931285400}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 642378554}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 254.88, y: -115.1}
+  m_SizeDelta: {x: 160, y: 59.5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &931285402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931285400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 10
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Weapons
+--- !u!222 &931285403
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931285400}
+  m_CullTransparentMesh: 1
+--- !u!114 &931285404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931285400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cebc3b3f14494096bf79726882a88aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameCore.UI.WeaponLevelView
+  _text: {fileID: 931285402}
 --- !u!114 &954048904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113290,7 +113385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1274337059
 Transform:
   m_ObjectHideFlags: 0
@@ -113433,6 +113528,7 @@ MonoBehaviour:
     _range: 3.5
     _timeBetweenAttack: 1
     _duration: 3
+  _displayName: FireBall
   _spriteRenderer1X: {fileID: 690851235}
   _collider1X: {fileID: 1274337061}
   _transformSprite1X: {fileID: 690851233}
@@ -114838,6 +114934,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DI.PlayerInstaller
   _playerMovement: {fileID: 1156330364}
   _playerHealth: {fileID: 1156330365}
+  _fireBallWeapon: {fileID: 1274337062}
+  _auraWeapon: {fileID: 142063561}
 --- !u!114 &1455653742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120027,22 +120125,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 185993837}
     m_Modifications:
-    - target: {fileID: 93245885615701046, guid: 813f8bca70cc08044be842abf7eddeae, type: 3}
-      propertyPath: _dotDuration
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 93245885615701046, guid: 813f8bca70cc08044be842abf7eddeae, type: 3}
-      propertyPath: _applyBleeding
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 93245885615701046, guid: 813f8bca70cc08044be842abf7eddeae, type: 3}
-      propertyPath: _dotTickInterval
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 93245885615701046, guid: 813f8bca70cc08044be842abf7eddeae, type: 3}
-      propertyPath: _dotDamagePerTick
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3969894711461708416, guid: 813f8bca70cc08044be842abf7eddeae, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.6080601
@@ -120151,22 +120233,6 @@ PrefabInstance:
     - target: {fileID: 2956237141009323739, guid: 2cc7484fddd70ca4ebc14f208a37cfe3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6574196454374933928, guid: 2cc7484fddd70ca4ebc14f208a37cfe3, type: 3}
-      propertyPath: _dotDuration
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6574196454374933928, guid: 2cc7484fddd70ca4ebc14f208a37cfe3, type: 3}
-      propertyPath: _applyBleeding
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6574196454374933928, guid: 2cc7484fddd70ca4ebc14f208a37cfe3, type: 3}
-      propertyPath: _dotTickInterval
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6574196454374933928, guid: 2cc7484fddd70ca4ebc14f208a37cfe3, type: 3}
-      propertyPath: _dotDamagePerTick
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
