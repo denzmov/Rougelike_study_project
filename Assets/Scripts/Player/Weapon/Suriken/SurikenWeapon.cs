@@ -61,7 +61,7 @@ namespace Player.Weapon.Suriken
                 {
                     Vector3 targetPosition = enemiesInRange[Random.Range(0, enemiesInRange.Length)].transform.position;
                     _direction = (targetPosition - transform.position).normalized;
-                    float angle = Mathf.Atan2(_direction.y, -_direction.x) * Mathf.Rad2Deg;
+                    float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
                     GameObject suriken = _objectPool.GetFromPool();
                     suriken.transform.SetParent(_container);
                     suriken.transform.position = transform.position;
