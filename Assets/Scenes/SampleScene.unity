@@ -5222,6 +5222,7 @@ Transform:
   m_Children:
   - {fileID: 1274337059}
   - {fileID: 142063559}
+  - {fileID: 1621436631}
   m_Father: {fileID: 1156330363}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &489493854
@@ -115247,6 +115248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DI.PlayerInstaller
   _playerMovement: {fileID: 1156330364}
   _playerHealth: {fileID: 1156330365}
+  _surikenWeapon: {fileID: 1621436633}
   _fireBallWeapon: {fileID: 1274337062}
   _auraWeapon: {fileID: 142063561}
 --- !u!114 &1455653742
@@ -116284,6 +116286,111 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 3
   m_ColliderType: 1
+--- !u!1 &1621436630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1621436631}
+  - component: {fileID: 1621436633}
+  - component: {fileID: 1621436632}
+  m_Layer: 3
+  m_Name: SurikenWeapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1621436631
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621436630}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 468021028}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1621436632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621436630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ffab9ee0114c37b218fdeb47acc791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameCore.Pool.ObjectPool
+  _prefab: {fileID: 3219566842365695452, guid: 6cb68ec266e74f44085a378d16342748, type: 3}
+--- !u!114 &1621436633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621436630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75bcc71e07d04b4387596fde385d9666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player.Weapon.Suriken.SurikenWeapon
+  _weaponStats:
+  - _speed: 4
+    _damage: 3
+    _range: 5
+    _timeBetweenAttack: 1
+    _duration: 2
+  - _speed: 4.5
+    _damage: 5
+    _range: 5.5
+    _timeBetweenAttack: 0.9
+    _duration: 2.2
+  - _speed: 5
+    _damage: 7
+    _range: 6
+    _timeBetweenAttack: 0.8
+    _duration: 2.4
+  - _speed: 5.5
+    _damage: 9
+    _range: 6.5
+    _timeBetweenAttack: 0.7
+    _duration: 2.6
+  - _speed: 6
+    _damage: 11
+    _range: 7
+    _timeBetweenAttack: 0.6
+    _duration: 2.8
+  - _speed: 6.5
+    _damage: 13
+    _range: 7
+    _timeBetweenAttack: 0.5
+    _duration: 3
+  - _speed: 7
+    _damage: 15
+    _range: 7
+    _timeBetweenAttack: 0.5
+    _duration: 3
+  - _speed: 8
+    _damage: 17
+    _range: 7
+    _timeBetweenAttack: 0.5
+    _duration: 3
+  _displayName: 
+  _objectPool: {fileID: 1621436632}
+  _container: {fileID: 1621436631}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1633654444
 GameObject:
   m_ObjectHideFlags: 0
