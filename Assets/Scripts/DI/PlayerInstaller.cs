@@ -1,5 +1,6 @@
 ﻿using Player;
 using Player.Weapon;
+using Player.Weapon.FrostBolt;
 using Player.Weapon.Suriken;
 using UnityEngine;
 using Zenject;
@@ -10,11 +11,12 @@ namespace DI
     {
         [SerializeField] private PlayerMovement _playerMovement;
         [SerializeField] private PlayerHealth _playerHealth;
-        [SerializeField] private SurikenWeapon _surikenWeapon;
         
         // ссылки на оружия игрока со сцены
         [SerializeField] private FireBallWeapon _fireBallWeapon;
         [SerializeField] private AuraWeapon _auraWeapon;
+        [SerializeField] private SurikenWeapon _surikenWeapon;
+        [SerializeField] private FrostBoltWeapon _frostBoltWeapon;
         
         public override void InstallBindings()
         {
@@ -26,6 +28,7 @@ namespace DI
             Container.Bind<BaseWeapon>().FromInstance(_fireBallWeapon).AsCached().NonLazy();
             Container.Bind<BaseWeapon>().FromInstance(_auraWeapon).AsCached().NonLazy();
             Container.Bind<SurikenWeapon>().FromInstance(_surikenWeapon).AsSingle().NonLazy();
+            Container.Bind<FrostBoltWeapon>().FromInstance(_frostBoltWeapon).AsSingle().NonLazy();
             // !!!важно - если добавляется новое оружие у игрока - его нужно добавить сюда!!!
             // Container.Bind<BaseWeapon>().FromInstance(оружие).AsCached();
             

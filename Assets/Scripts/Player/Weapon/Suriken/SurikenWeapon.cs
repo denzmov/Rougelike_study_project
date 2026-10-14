@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using GameCore;
 using GameCore.Pool;
 using UnityEngine;
 

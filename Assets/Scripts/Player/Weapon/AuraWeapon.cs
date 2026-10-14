@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Enemy;
 using GameCore;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Player.Weapon

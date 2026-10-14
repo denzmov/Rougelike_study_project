@@ -12,7 +12,7 @@ namespace Player.Weapon
 
         protected virtual void OnEnable() => StartCoroutine(TimerToHide());
 
-        private void OnTriggerEnter2D(Collider2D other)
+        protected private virtual void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.TryGetComponent(out EnemyHealth enemy))
             {

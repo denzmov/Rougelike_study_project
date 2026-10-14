@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy.EnemyMove
   _moveSpeed: 6
+  _freezeTimer: 3
   _animator: {fileID: 963139846586065515}
 --- !u!114 &6213262336946771544
 MonoBehaviour:

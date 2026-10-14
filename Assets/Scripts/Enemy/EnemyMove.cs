@@ -8,16 +8,24 @@ namespace Enemy
     public class EnemyMove : MonoBehaviour
     {
         [SerializeField] private float _moveSpeed;
-        //[SerializeField] private float _freezeTimer; // пока уберем, т.к. не используем.
+        [SerializeField] private float _freezeTimer; // для замедления противника.
         [SerializeField] private Animator _animator;
         //private Vector3 _direction; // оставляем локальной переменной внутри метода Move
         private PlayerMovement _playerMovement;
         private WaitForSeconds _checkTime =  new WaitForSeconds(3f);
+        private WaitForSeconds _freeze;
         private Coroutine _distanceToHide;
+        private float _initialSpeed;
         
         private float _slowMultiplier = 1f; // 1 — обычная скорость, 0.5 — замедление
         private int _slowSources;           // счётчик, сколько эффектов сейчас тормозят
 
+        private void Start()
+        {
+            _initialSpeed = _moveSpeed;
+            _freeze = new WaitForSeconds(_freezeTimer);
+        }
+        
         private void OnEnable()
         {
             _distanceToHide = StartCoroutine(CheckDistanceToHide());
@@ -28,6 +36,12 @@ namespace Enemy
         private void OnDisable() => StopCoroutine(_distanceToHide);
 
         private void Update() => Move();
+        
+        public void FreezeEnemy()
+        {
+            if (gameObject.activeSelf)
+                StartCoroutine(StartFreeze());
+        }
 
         private void Move()
         {
@@ -58,15 +72,19 @@ namespace Enemy
             _slowMultiplier = multiplier;
             _slowSources++;
         }
-        
         public void RemoveSlow() // снять замедление (аура при выходе врага из зоны)
         {
             _slowSources = Mathf.Max(0, _slowSources - 1);
             if (_slowSources == 0)
                 _slowMultiplier = 1f; // никого не тормозим, обычная скорость
         }
-        
-        
+
+        private IEnumerator StartFreeze() // заморозка врагов, снижаем MS противника
+        {
+            _moveSpeed /= 2;
+            yield return _freeze;
+            _moveSpeed = _initialSpeed;
+        }
 
         [Inject] private void Construct(PlayerMovement playerMovement) => _playerMovement = playerMovement;
     }
