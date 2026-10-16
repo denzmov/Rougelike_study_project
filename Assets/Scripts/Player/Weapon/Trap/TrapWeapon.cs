@@ -16,8 +16,8 @@ namespace Player.Weapon.Trap
         public void Activate()
         {
             SetStats(0);
-            LevelUp();
-            LevelUp();
+            //LevelUp();
+            //LevelUp();
             LevelUp();
             LevelUp();
             LevelUp();

@@ -1,5 +1,6 @@
 ﻿using Player;
 using Player.Weapon;
+using Player.Weapon.Bow;
 using Player.Weapon.FrostBolt;
 using Player.Weapon.Suriken;
 using Player.Weapon.Trap;
@@ -19,6 +20,7 @@ namespace DI
         [SerializeField] private SurikenWeapon _surikenWeapon;
         [SerializeField] private FrostBoltWeapon _frostBoltWeapon;
         [SerializeField] private TrapWeapon _trapWeapon;
+        [SerializeField] private BowWeapon _bowWeapon;
         
         public override void InstallBindings()
         {
@@ -29,9 +31,10 @@ namespace DI
             // биндим каждое оружие как BaseWeapon, а Zenject соберёт оба бинда в List<BaseWeapon> для WeaponLevelView
             Container.Bind<BaseWeapon>().FromInstance(_fireBallWeapon).AsCached();
             Container.Bind<BaseWeapon>().FromInstance(_auraWeapon).AsCached();
-            Container.Bind<SurikenWeapon>().FromInstance(_surikenWeapon).AsSingle();
-            Container.Bind<FrostBoltWeapon>().FromInstance(_frostBoltWeapon).AsSingle();
-            Container.Bind<TrapWeapon>().FromInstance(_trapWeapon).AsSingle();
+            Container.Bind<SurikenWeapon>().FromInstance(_surikenWeapon).AsCached();
+            Container.Bind<FrostBoltWeapon>().FromInstance(_frostBoltWeapon).AsCached();
+            Container.Bind<TrapWeapon>().FromInstance(_trapWeapon).AsCached();
+            Container.Bind<BowWeapon>().FromInstance(_bowWeapon).AsCached();
             // !!!важно - если добавляется новое оружие у игрока - его нужно добавить сюда!!!
             // Container.Bind<BaseWeapon>().FromInstance(оружие).AsCached();
             
