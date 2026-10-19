@@ -20,7 +20,7 @@ namespace Player.Weapon.Trap
             StartCoroutine(CheckDistance());
         }
 
-        private protected override void OnTriggerEnter2D(Collider2D other)
+        protected override void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.TryGetComponent(out EnemyHealth enemy))
             {

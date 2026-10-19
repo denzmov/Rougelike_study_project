@@ -11,8 +11,9 @@ namespace Player.Weapon
         protected float Damage;
 
         protected virtual void OnEnable() => StartCoroutine(TimerToHide());
-
-        protected private virtual void OnTriggerEnter2D(Collider2D other)
+        
+        // Было private void, поменял на protected virtual - чтобы наследники (FrostBolt) могли добавить заморозку.
+        protected virtual void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.TryGetComponent(out EnemyHealth enemy))
             {

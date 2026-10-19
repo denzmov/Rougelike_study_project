@@ -19,7 +19,11 @@ namespace Enemy
         
         private float _slowMultiplier = 1f; // 1 — обычная скорость, 0.5 — замедление
         private int _slowSources;           // счётчик, сколько эффектов сейчас тормозят
-
+        
+        private bool _isFrozen; // Флаг полной остановки противника.
+        private Coroutine _freezeRoutine; // Ссылка на активную корутину заморозки, чтобы не плодить дубликаты.
+        
+        
         private void Start()
         {
             _initialSpeed = _moveSpeed;
@@ -31,20 +35,43 @@ namespace Enemy
             _distanceToHide = StartCoroutine(CheckDistanceToHide());
             _slowMultiplier = 1f;
             _slowSources = 0;
+            
+            // При выходе из пула сбрасываем заморозку.
+            _isFrozen = false;
+            _freezeRoutine = null;
         }
 
         private void OnDisable() => StopCoroutine(_distanceToHide);
 
         private void Update() => Move();
         
-        public void FreezeEnemy()
+        public void FreezeEnemy() => FreezeEnemy(_freezeTimer);// Старый метод оставляем для совместимости. Теперь он тоже даёт полную остановку на _freezeTimer секунд.
+       
+        // Новый метод с явной длительностью - его вызывает ледяной шар (2 секунды)
+        public void FreezeEnemy(float duration)
         {
-            if (gameObject.activeSelf)
-                StartCoroutine(StartFreeze());
+            if (!gameObject.activeSelf)
+                return;
+            // Если враг уже заморожен - перезапускаем таймер, а не накладываем второй эффект.
+            if (_freezeRoutine != null)
+                StopCoroutine(_freezeRoutine);
+            _freezeRoutine = StartCoroutine(FreezeRoutine(duration));
+        }
+        // Корутина полной остановки.
+        private IEnumerator FreezeRoutine(float duration)
+        {
+            _isFrozen = true; // полная остановка
+            yield return new WaitForSeconds(duration);
+            _isFrozen = false; // снимаем остановку
+            _freezeRoutine = null;
         }
 
         private void Move()
         {
+            // Во время заморозки враг стоит на месте.
+            if (_isFrozen)
+                return;
+            
             Vector3 direction = (_playerMovement.transform.position - transform.position).normalized;
             //transform.position += direction * (_moveSpeed * Time.deltaTime); //без замедления
             transform.position += direction * (_moveSpeed * _slowMultiplier * Time.deltaTime); // с учетом замедления
@@ -65,8 +92,6 @@ namespace Enemy
             }
         }
         
-        
-        
         public void ApplySlow(float multiplier) // применить замедление (вызывает аура при входе врага в зону)
         {
             _slowMultiplier = multiplier;
@@ -79,6 +104,7 @@ namespace Enemy
                 _slowMultiplier = 1f; // никого не тормозим, обычная скорость
         }
 
+        // СТАРАЯ корутина - оставляем, чтобы не сломать другие вызовы FreezeEnemy().
         private IEnumerator StartFreeze() // заморозка врагов, снижаем MS противника
         {
             _moveSpeed /= 2;

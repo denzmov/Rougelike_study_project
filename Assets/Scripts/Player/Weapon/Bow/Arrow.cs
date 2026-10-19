@@ -14,7 +14,7 @@ namespace Player.Weapon.Bow
             Damage = _bowWeapon.Damage;
         }
 
-        private protected override void OnTriggerEnter2D(Collider2D other)
+        protected override void OnTriggerEnter2D(Collider2D other)
         {
            base.OnTriggerEnter2D(other);
            if (_bowWeapon.CurrentLevel <= 4) // при уровне > 4 стрела будет пробивать врагов насквозь
