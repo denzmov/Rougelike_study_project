@@ -41,7 +41,23 @@ namespace Enemy
             _freezeRoutine = null;
         }
 
-        private void OnDisable() => StopCoroutine(_distanceToHide);
+        private void OnDisable()
+        {
+            // StopCoroutine(null) бросает NullReferenceException.
+            // Проверяем ссылку перед остановкой.
+            if (_distanceToHide != null)
+            {
+                StopCoroutine(_distanceToHide);
+                _distanceToHide = null;
+            }
+
+            // Заодно безопасно останавливаем корутину заморозки.
+            if (_freezeRoutine != null)
+            {
+                StopCoroutine(_freezeRoutine);
+                _freezeRoutine = null;
+            }
+        }
 
         private void Update() => Move();
         
@@ -85,10 +101,16 @@ namespace Enemy
         {
             while (true)
             {
+                // Сначала ждём — только потом проверяем.
+                // Так корутина не выключит объект внутри OnEnable до присваивания _distanceToHide.
+                yield return _checkTime;
+
                 float distance = Vector3.Distance(transform.position, _playerMovement.transform.position);
                 if (distance > 20f)
+                {
                     gameObject.SetActive(false);
-                yield return _checkTime;
+                    yield break; // выходим из цикла: объект уже в пуле, крутиться дальше незачем
+                }
             }
         }
         
