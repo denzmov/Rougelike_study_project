@@ -92,11 +92,17 @@ namespace Enemy
             }
         }
         
-        public void ApplySlow(float multiplier) // применить замедление (вызывает аура при входе врага в зону)
+        public void ApplySlow(float multiplier, float duration = 0f)
         {
             _slowMultiplier = multiplier;
             _slowSources++;
+
+            // Если duration > 0 — снимаем замедление по таймеру.
+            // Если 0 — замедление держится до явного RemoveSlow() (как у ауры).
+            if (duration > 0f)
+                StartCoroutine(RemoveSlowAfter(duration));
         }
+        
         public void RemoveSlow() // снять замедление (аура при выходе врага из зоны)
         {
             _slowSources = Mathf.Max(0, _slowSources - 1);
@@ -110,6 +116,12 @@ namespace Enemy
             _moveSpeed /= 2;
             yield return _freeze;
             _moveSpeed = _initialSpeed;
+        }
+        
+        private IEnumerator RemoveSlowAfter(float duration)
+        {
+            yield return new WaitForSeconds(duration);
+            RemoveSlow();
         }
 
         [Inject] private void Construct(PlayerMovement playerMovement) => _playerMovement = playerMovement;
