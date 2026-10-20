@@ -64,16 +64,16 @@ namespace Player.Weapon
         protected virtual void Start()
         {
             SetStats(0);
+            
+            LevelUp();
+            LevelUp();
+            LevelUp();
+            LevelUp();
+            LevelUp();
+            LevelUp();
+            LevelUp();
+            
             SetupWeapon();
-            
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            LevelUp();
-            
             Activate();
             
         }

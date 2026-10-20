@@ -2,6 +2,7 @@
 using Player.Weapon;
 using Player.Weapon.Bow;
 using Player.Weapon.FrostBolt;
+using Player.Weapon.LongSword;
 using Player.Weapon.Suriken;
 using Player.Weapon.Trap;
 using UnityEngine;
@@ -21,6 +22,7 @@ namespace DI
         [SerializeField] private FrostBoltWeapon _frostBoltWeapon;
         [SerializeField] private TrapWeapon _trapWeapon;
         [SerializeField] private BowWeapon _bowWeapon;
+        [SerializeField] private LongSwordWeapon _longSwordWeapon;
         
         public override void InstallBindings()
         {
@@ -35,8 +37,10 @@ namespace DI
             Container.Bind<FrostBoltWeapon>().FromInstance(_frostBoltWeapon).AsCached();
             Container.Bind<TrapWeapon>().FromInstance(_trapWeapon).AsCached();
             Container.Bind<BowWeapon>().FromInstance(_bowWeapon).AsCached();
+            Container.Bind<LongSwordWeapon>().FromInstance(_longSwordWeapon).AsCached();
             // !!!важно - если добавляется новое оружие у игрока - его нужно добавить сюда!!!
             // Container.Bind<BaseWeapon>().FromInstance(оружие).AsCached();
+            
             
         }
     }
